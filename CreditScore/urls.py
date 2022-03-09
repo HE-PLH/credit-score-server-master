@@ -13,8 +13,6 @@ urlpatterns = [
     url(r'^farmer/([0-9]+)$', views.FarmerApi),
     url(r'^farm$', views.FarmApi),
     url(r'^farm/([0-9]+)$', views.FarmApi),
-    url(r'^_farm$', views.FaarmApi),
-    url(r'^_farm/([0-9]+)$', views.FaarmApi),
     url(r'^finance$', views.FinanceApi),
     url(r'^finance/([0-9]+)$', views.FinanceApi),
     url(r'^weather', views.WeatherApi),

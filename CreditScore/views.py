@@ -72,52 +72,6 @@ def FarmApi(request):
         return JsonResponse("Deleted successfully", safe=False)
 
 
-@csrf_exempt
-def FaarmApi(request):
-    eav.register(Farm)
-    obj = Farm
-
-    s = FarmSerializer
-    if request.method == 'GET':
-        eav.Attribute.objects.create(name='City', datatype=Attribute.TYPE_TEXT)
-    elif request.method == 'POST':
-        okay = True
-        item_data = JSONParser().parse(request)
-
-        print(item_data)
-        if type(item_data) == list:
-            for i in item_data:
-                eav.Attribute.objects.create(name=i, datatype=eav.Attribute.TYPE_TEXT)
-                # item_serializer = s(data=i)
-                Farm.eav[i] = item_data[i]
-                print(_Farm.save())
-
-            if okay:
-                return JsonResponse("Added successfully", safe=False)
-            else:
-                return JsonResponse("Failed to add", safe=False)
-
-        else:
-            item_serializer = s(data=item_data)
-            print(item_serializer)
-            if item_serializer.is_valid():
-                item_serializer.save()
-                return JsonResponse("Added successfully", safe=False)
-            return JsonResponse("Failed to add", safe=False)
-    elif request.method == 'PUT':
-        item_data = JSONParser().parse(request)
-        item = obj.objects.get(id=item_data['id'])
-        item_serializer = s(item, data=item_data)
-        if item_serializer.is_valid():
-            item_serializer.save()
-            return JsonResponse("Updated successfully", safe=False)
-        return JsonResponse("Failed to update", safe=False)
-
-
-    elif request.method == 'DELETE':
-        item = Farmer.objects.get()
-        item.delete()
-        return JsonResponse("Deleted successfully", safe=False)
 
 
 @csrf_exempt
@@ -551,19 +505,19 @@ def get_score(data, table):
     tbl = obj_serializer(obj.objects.get(Name=table))["Id"].value
     print(tbl)
     for item in data:
-        print(item)
         try:
             ans = obj2_serializer(obj2.objects.get(Name=data[item],
                                                    TypeId=obj1_serializer(obj1.objects.get(Name=item, CategoryId=tbl))[
                                                        "Id"].value, CategoryId=tbl))
             # result[item] = ans["Score"].value
-            sum, = ans["Score"].value
+            sum = ans["Score"].value
         except:
             # result[item] = data[item]
             print(item, "is messy")
 
     # data.remove("token")
     data["sum"] = sum
+    print(sum)
     return data
 
 

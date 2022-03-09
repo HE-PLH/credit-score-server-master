@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Farmer_credit_scoring/.idea/Farmer_credit_scoring.iml" filepath="$PROJECT_DIR$/../Farmer_credit_scoring/.idea/Farmer_credit_scoring.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/credit-score-server.iml" filepath="$PROJECT_DIR$/.idea/credit-score-server.iml" />
     </modules>
   </component>
